@@ -31,13 +31,13 @@
         const chat = document.getElementById("chat-desplegado");
         const chatEscondido = document.getElementById("chat-escondido");
         chat.style.display = "none";
-        chatEscondido.style.display = "flex";
+        chatEscondido.style.visibility = "";
       }
 
       function abrirChat() {
         const chat = document.getElementById("chat-desplegado");
         const chatEscondido = document.getElementById("chat-escondido");
-        chatEscondido.style.display = "none";
+        chatEscondido.style.visibility = "hidden";
         chat.style.display = "flex";
       }
 
@@ -209,113 +209,97 @@
       />
     </div>
 
-    <!-- CHAT EN VIVO -->
-    <div
-      id="chat-desplegado"
-      style="
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        display: none;
-        flex-direction: column;
-        background-color: #d9dad7;
-        height: 500px;
-        width: 300px;
-        margin: 0 2% 4% 0;
-      "
-    >
+    <!-- FOOTER -->
+    <div>
+      <!-- CHAT EN VIVO -->
       <div
+        id="chat-desplegado"
         style="
-          background-color: #c24d2c;
-          height: 40px;
-          padding: 10px 0 0 10px;
-          display: flex;
-          justify-content: space-between;
+          display: none;
+          flex-direction: column;
+          background-color: #d9dad7;
+          height: 500px;
+          width: 300px;
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          margin-right: 20px;
+          margin-top: 70px;
+          z-index: 1;
         "
       >
-        Envianos un mensaje<i
-          class="fa fa-angle-down"
-          style="margin: 2px 20px 0 0; cursor: pointer"
-          onclick="cerrarChat()"
-        ></i>
-      </div>
-      <!-- CUERPO CHAT -->
-      <div id="mensajes-cuerpo" style="overflow-x: hidden; overflow-y: auto; height: 65%; color: black"></div>
-      <!-- END CUERPO CHAT -->
-      <div style="border-bottom: 1px solid #5f6769; width: 95%; display: flex; align-self: center"></div>
-      <div style="color: black; display: flex; text-align: center">
-        <div>
-          <input id="nombre-field" style="width: 90%; margin-top: 10px" placeholder="Tu nombre" />
-          <input id="mensaje-field" style="width: 90%; margin-top: 3px; height: 40px" placeholder="Tu mensaje" />
-          <div style="display: flex; width: 100%; justify-content: right">
-            <div style="width: 100%; display: flex; margin-left: 11px">
-              <input id="red-social-field" style="width: 80%; margin-top: 3px" placeholder="Email" />
+        <div
+          style="
+            background-color: #c24d2c;
+            height: 40px;
+            padding: 10px 0 0 10px;
+            display: flex;
+            justify-content: space-between;
+          "
+        >
+          Envianos un mensaje<i
+            class="fa fa-angle-down"
+            style="margin: 2px 20px 0 0; cursor: pointer"
+            onclick="cerrarChat()"
+          ></i>
+        </div>
+        <!-- CUERPO CHAT -->
+        <div id="mensajes-cuerpo" style="overflow-x: hidden; overflow-y: auto; height: 65%; color: black"></div>
+        <!-- END CUERPO CHAT -->
+        <div style="border-bottom: 1px solid #5f6769; width: 95%; display: flex; align-self: center"></div>
+        <div style="color: black; display: flex; text-align: center">
+          <div>
+            <input id="nombre-field" style="width: 90%; margin-top: 10px" placeholder="Tu nombre" />
+            <input id="mensaje-field" style="width: 90%; margin-top: 3px; height: 40px" placeholder="Tu mensaje" />
+            <div style="display: flex; width: 100%; justify-content: right">
+              <div style="width: 100%; display: flex; margin-left: 11px">
+                <input id="red-social-field" style="width: 80%; margin-top: 3px" placeholder="Email" />
+              </div>
+              <button
+                style="
+                  margin-right: 4%;
+                  margin-top: 4px;
+                  background: #c24d2c;
+                  color: white;
+                  border: none;
+                  padding: 5px;
+                  cursor: pointer;
+                "
+                onclick="comentar()"
+              >
+                Enviar
+              </button>
             </div>
-            <button
-              style="
-                margin-right: 4%;
-                margin-top: 4px;
-                background: #c24d2c;
-                color: white;
-                border: none;
-                padding: 5px;
-                cursor: pointer;
-              "
-              onclick="comentar()"
-            >
-              Enviar
-            </button>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- CHAT ESCONDIDO -->
-    <div
-      id="chat-escondido"
-      style="
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        display: flex;
-        flex-direction: column;
-        width: 300px;
-        margin: 0 2% 4% 0;
-      "
-    >
-      <div
-        style="
-          background-color: #c24d2c;
-          height: 40px;
-          padding: 10px 0 0 10px;
-          display: flex;
-          justify-content: space-between;
-        "
-      >
-        Envianos un mensaje<i
-          class="fa fa-angle-up"
-          style="margin: 2px 20px 0 0; cursor: pointer"
-          onclick="abrirChat()"
-        ></i>
+      <!-- CHAT ESCONDIDO -->
+      <div style="width: 100%; display: flex; justify-content: end; margin-top: 5px">
+        <div id="chat-escondido" style="display: flex; flex-direction: column; width: 300px; margin-right: 20px">
+          <div
+            style="
+              background-color: #c24d2c;
+              height: 40px;
+              padding: 10px 0 0 10px;
+              display: flex;
+              justify-content: space-between;
+            "
+          >
+            Envianos un mensaje<i
+              class="fa fa-angle-up"
+              style="margin: 2px 20px 0 0; cursor: pointer"
+              onclick="abrirChat()"
+            ></i>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <!-- FOOTER -->
-    <div
-      style="
-        display: flex;
-        background: #1a2639;
-        width: 100%;
-        height: 80px;
-        align-items: center;
-        margin-top: 50px;
-        z-index: 1;
-      "
-    >
-      <span style="margin-left: 20px; width: 40%">Todos los derechos reservados ©</span>
-      <div style="width: 100%; display: flex; flex-direction: column; margin-left: 16%">
-        <div>Ayudanos respondiendo esta breve encuesta:</div>
-        <a href="/redirect?dest=https://forms.gle/m1isNQdp6kX4MxY17" style="color: #d9dad7">Form de Google</a>
+      <div style="display: flex; background: #1a2639; width: 100%; height: 80px; align-items: center; z-index: 100000">
+        <span style="margin-left: 20px; width: 40%">Todos los derechos reservados ©</span>
+        <div style="width: 100%; display: flex; flex-direction: column; margin-left: 16%">
+          <div>Ayudanos respondiendo esta breve encuesta:</div>
+          <a href="/redirect?dest=https://forms.gle/m1isNQdp6kX4MxY17" style="color: #d9dad7">Form de Google</a>
+        </div>
       </div>
     </div>
   </body>
