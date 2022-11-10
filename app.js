@@ -3,8 +3,7 @@ const usuarios = require("./src/routes/usuarios");
 const busqueda = require("./src/routes/busqueda");
 const home = require("./src/routes/home");
 const admin = require("./src/routes/admin");
-const contacto = require("./src/routes/contacto");
-// const redirect = require("./src/routes/redirect");
+const redirect = require("./src/routes/redirect");
 
 const app = express();
 const PORT = 5000;
@@ -24,8 +23,7 @@ app.use((req, res, next) => {
 app.use(express.static("public"));
 app.use("/", home);
 app.use("/admin", admin);
-// app.use("/redirect", redirect);
-app.use("/contacto", contacto);
+app.use("/redirect", redirect);
 app.use("/usuarios", usuarios);
 app.use("/busqueda", busqueda);
 

@@ -4,10 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Cyberely Test Vulnerabilities - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     <script type="text/javascript">
+      let GLOBAL_ID = 1;
+
       function buscar() {
         const input = document.getElementById("input-buscar");
         fetch(`https://cyberely-test-vulns.onrender.com/busqueda?q=${input.value}`, {
@@ -35,6 +37,89 @@
         const chatEscondido = document.getElementById("chat-escondido");
         chatEscondido.style.display = "none";
         chat.style.display = "flex";
+      }
+
+      function agregarComentarioAHTML(mensaje, redSocial, nombreUser) {
+        const mensajesCuerpo = document.getElementById("mensajes-cuerpo");
+
+        const container = mensajesCuerpo.appendChild(document.createElement("div"));
+        container.style.display = "flex";
+        container.style.width = "100%";
+        container.style.justifyContent = "end";
+        container.style.marginRight = "5px";
+        const innerContainer = container.appendChild(document.createElement("div"));
+        innerContainer.style.height = "50px";
+        innerContainer.style.width = "60%";
+        innerContainer.style.backgroundColor = "#efecec";
+        innerContainer.style.margin = "5px 5px 0 0";
+        innerContainer.style.padding = "8px";
+        innerContainer.style.borderRadius = "5px";
+        const headerContainer = innerContainer.appendChild(document.createElement("div"));
+        headerContainer.style.fontSize = "8pt";
+        headerContainer.style.marginBottom = "2px";
+        headerContainer.style.display = "flex";
+        const nombreDiv = headerContainer.appendChild(document.createElement("div"));
+        nombreDiv.innerHTML = nombreUser;
+        nombreDiv.id = GLOBAL_ID + "-nombre";
+        const socialDiv = headerContainer.appendChild(document.createElement("div"));
+        socialDiv.innerHTML = redSocial;
+        socialDiv.id = GLOBAL_ID + "-social";
+        socialDiv.style.marginLeft = "5px";
+        const barraDiv = innerContainer.appendChild(document.createElement("div"));
+        barraDiv.style.borderBottom = "1px solid #a0a1a1";
+        barraDiv.style.display = "flex";
+        barraDiv.style.alignSelf = "center";
+        barraDiv.style.marginBottom = "5px";
+        const mensajeDiv = innerContainer.appendChild(document.createElement("div"));
+        mensajeDiv.innerHTML = mensaje;
+        mensajeDiv.id = GLOBAL_ID + "-mensaje";
+        mensajeDiv.style.fontSize = "8pt";
+
+        GLOBAL_ID += 1;
+      }
+
+      function cargarComentarios() {
+        fetch(`https://cyberely-test-vulns.onrender.com/usuarios/comentarios?usuarioId=1`, {
+          method: "GET",
+          mode: "cors",
+          credentials: "include",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            const mappedComments = data?.rows?.map((r) => {
+              return {
+                id: r.usuario_id,
+                nomberUser: r.nombrecomentario,
+                redSocial: r.redsocial,
+                mensaje: r.comentario,
+              };
+            });
+            mappedComments.forEach(({ nomberUser, redSocial, mensaje }) => {
+              agregarComentarioAHTML(mensaje, redSocial, nomberUser);
+            });
+          });
+      }
+      cargarComentarios();
+
+      function comentar() {
+        const nombreField = document.getElementById("nombre-field");
+        const mensajeField = document.getElementById("mensaje-field");
+        const redSocialField = document.getElementById("red-social-field");
+        fetch(
+          `https://cyberely-test-vulns.onrender.com/usuarios/hacerComentario?usuarioId=1&comentario=${mensajeField.value}&social=${redSocialField.value}&nombre=${nombreField.value}`,
+          {
+            method: "GET",
+            mode: "cors",
+            credentials: "include",
+          }
+        )
+          .then((response) => response.json())
+          .then(() => {
+            agregarComentarioAHTML(mensajeField.value, redSocialField.value, nombreField.value);
+            nombreField.value = "";
+            redSocialField.value = "";
+            mensajeField.value = "";
+          });
       }
     </script>
   </head>
@@ -150,44 +235,18 @@
           onclick="cerrarChat()"
         ></i>
       </div>
-      <div style="height: 65%; color: black">
-        <div style="display: flex; width: 100%; justify-content: end; margin-right: 5px">
-          <div
-            style="
-              height: 50px;
-              width: 60%;
-              background-color: #efecec;
-              margin: 5px 5px 0 0;
-              padding: 8px;
-              border-radius: 5px;
-            "
-          >
-            <div style="font-size: 8pt; margin-bottom: 2px">Franco</div>
-            <div style="border-bottom: 1px solid #a0a1a1; display: flex; align-self: center; margin-bottom: 5px"></div>
-            <div style="font-size: 8pt">Hola, quería hablar con un representante</div>
-          </div>
-        </div>
-        <div
-          style="
-            height: 50px;
-            width: 60%;
-            background-color: white;
-            margin: 5px 0 0 5px;
-            padding: 8px;
-            border-radius: 5px;
-          "
-        >
-          <div style="font-size: 8pt; margin-bottom: 2px">Representante</div>
-          <div style="border-bottom: 1px solid #a0a1a1; display: flex; align-self: center; margin-bottom: 5px"></div>
-          <div style="font-size: 8pt">Hola Franco, ¿En qué puedo ayudarte?</div>
-        </div>
-      </div>
+      <!-- CUERPO CHAT -->
+      <div id="mensajes-cuerpo" style="overflow-x: hidden; overflow-y: auto; height: 65%; color: black"></div>
+      <!-- END CUERPO CHAT -->
       <div style="border-bottom: 1px solid #5f6769; width: 95%; display: flex; align-self: center"></div>
       <div style="color: black; display: flex; text-align: center">
         <div>
-          <input style="width: 90%; margin-top: 10px" placeholder="Tu nombre" />
-          <input style="width: 90%; margin-top: 3px; height: 40px" placeholder="Tu mensaje" />
+          <input id="nombre-field" style="width: 90%; margin-top: 10px" placeholder="Tu nombre" />
+          <input id="mensaje-field" style="width: 90%; margin-top: 3px; height: 40px" placeholder="Tu mensaje" />
           <div style="display: flex; width: 100%; justify-content: right">
+            <div style="width: 100%; display: flex; margin-left: 11px">
+              <input id="red-social-field" style="width: 80%; margin-top: 3px" placeholder="Red social" />
+            </div>
             <button
               style="
                 margin-right: 4%;
@@ -198,6 +257,7 @@
                 padding: 5px;
                 cursor: pointer;
               "
+              onclick="comentar()"
             >
               Enviar
             </button>
