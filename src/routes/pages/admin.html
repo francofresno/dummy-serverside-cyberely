@@ -10,6 +10,8 @@
     <script type="text/javascript">
       function buscar() {
         const buscarInput = document.getElementById("input-buscar");
+        if (!buscarInput.value) return;
+
         fetch(`https://cyberely-test-vulns.onrender.com/usuarios?nombre=${buscarInput.value}`, {
           method: "GET",
           mode: "cors",
@@ -27,6 +29,9 @@
 
       function cambiarPw() {
         const cambiarPwInput = document.getElementById("input-pw");
+
+        if (!cambiarPwInput.value) return;
+
         fetch(
           `https://cyberely-test-vulns.onrender.com/usuarios/changePassword?newPassword=${cambiarPwInput.value}&usuarioId=1`,
           {
@@ -44,6 +49,39 @@
 
           pwMensaje.innerHTML = "Contraseña cambiada con éxito";
         });
+      }
+
+      function crearUsuario() {
+        const usuario = document.getElementById("input-nuevo-usuario");
+        const pw = document.getElementById("input-nuevo-pw");
+        const email = document.getElementById("input-nuevo-email");
+
+        if (!usuario.value || !pw.value || !email.value) return;
+
+        fetch(`https://cyberely-test-vulns.onrender.com/usuarios/crearUsuario`, {
+          method: "POST",
+          mode: "cors",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nombre: usuario.value,
+            contraseña: pw.value,
+            email: email.value,
+          }),
+        })
+          .then((response) => response.json())
+          .then(() => {
+            const usuarioMensaje = document.getElementById("usuario-mensaje");
+            const containerUsuario = document.getElementById("usuario-mensaje-container");
+            usuario.value = "";
+            pw.value = "";
+            email.value = "";
+            const child = containerUsuario.appendChild(document.createElement("i"));
+            child.classList.add("fa");
+            child.classList.add("fa-check");
+
+            usuarioMensaje.innerHTML = "Contraseña cambiada con éxito";
+          });
       }
     </script>
   </head>
@@ -136,7 +174,40 @@
           </div>
         </div>
       </div>
-      <div style="background-color: #efecec; height: 45%; width: 80%">s</div>
+      <div style="background-color: #efecec; height: 45%; width: 80%">
+        <div style="margin-top: 3%; width: 100%">
+          <div style="display: flex; flex-direction: column; width: 100%; align-items: center; margin-bottom: 20px">
+            <span style="font-weight: 700">Cree un nuevo usuario</span>
+          </div>
+          <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px">
+            <input id="input-nuevo-usuario" placeholder="Nombre de usuario" style="width: 300px; height: 30px" />
+            <input id="input-nuevo-pw" type="password" placeholder="Contraseña" style="width: 300px; height: 30px" />
+            <input id="input-nuevo-email" placeholder="Email" style="width: 300px; height: 30px" />
+            <button
+              onclick="crearUsuario()"
+              style="background: #c24d2c; color: white; border: none; padding: 10px; cursor: pointer"
+            >
+              CREAR
+            </button>
+          </div>
+          <div
+            id="usuario-mensaje-container"
+            style="display: flex; color: green; align-items: self-end; width: 100%; justify-content: center"
+          >
+            <div
+              id="usuario-mensaje"
+              style="
+                display: flex;
+                justify-content: center;
+                margin-top: 15px;
+                color: green;
+                margin-right: 5px;
+                font-size: 10pt;
+              "
+            ></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- FOOTER -->

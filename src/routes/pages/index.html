@@ -12,6 +12,8 @@
 
       function buscar() {
         const input = document.getElementById("input-buscar");
+        if (!input.value) return;
+
         fetch(`https://cyberely-test-vulns.onrender.com/busqueda?q=${input.value}`, {
           method: "GET",
           mode: "cors",
@@ -105,6 +107,9 @@
         const nombreField = document.getElementById("nombre-field");
         const mensajeField = document.getElementById("mensaje-field");
         const redSocialField = document.getElementById("red-social-field");
+
+        if (!nombreField.value || !mensajeField.value || !redSocialField.value) return;
+
         fetch(
           `https://cyberely-test-vulns.onrender.com/usuarios/hacerComentario?usuarioId=1&comentario=${mensajeField.value}&social=${redSocialField.value}&nombre=${nombreField.value}`,
           {
