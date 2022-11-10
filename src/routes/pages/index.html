@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <script type="text/javascript">
+      function buscar() {
+        const input = document.getElementById("input-buscar");
+        fetch(`http://localhost:5000/busqueda?q=${input.value}`, {
+          method: "GET",
+          mode: "cors",
+          credentials: "include",
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            const busquedaMessage = `Error al buscar: ${data}`;
+            const div = document.getElementById("busqueda-error");
+            div.innerHTML = busquedaMessage;
+          });
+      }
+
+      function cerrarChat() {
+        const chat = document.getElementById("chat-desplegado");
+        const chatEscondido = document.getElementById("chat-escondido");
+        chat.style.display = "none";
+        chatEscondido.style.display = "flex";
+      }
+
+      function abrirChat() {
+        const chat = document.getElementById("chat-desplegado");
+        const chatEscondido = document.getElementById("chat-escondido");
+        chatEscondido.style.display = "none";
+        chat.style.display = "flex";
+      }
+    </script>
+  </head>
+  <body
+    style="
+      background: #3e4a61;
+      margin: 0;
+      color: #d9dad7;
+      font-family: verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+    "
+  >
+    <!-- NAVBAR -->
+    <nav style="display: flex; background: #1a2639; width: 100%">
+      <div style="width: 30%; display: flex; align-items: center; margin-left: 20px; font-weight: 600">
+        CYBERELY TEST PAGE
+      </div>
+      <ul
+        style="display: flex; width: 100%; list-style-type: none; gap: 2%; justify-content: right; margin-right: 15px"
+      >
+        <li><a href="/" style="text-decoration: none; color: #d9dad7; border-bottom: 2px solid #c24d2c">Home</a></li>
+        <li><a href="/admin" style="text-decoration: none; color: #d9dad7">Admin</a></li>
+        <li><a href="/contacto" style="text-decoration: none; color: #d9dad7">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <!-- BUSCADOR -->
+    <div style="margin-top: 2%; width: 100%">
+      <div style="display: flex; justify-content: center">
+        <input id="input-buscar" placeholder="Buscar fotos por palabra clave" style="width: 300px; height: 30px" />
+        <button
+          onclick="buscar()"
+          style="background: #c24d2c; color: white; border: none; padding: 5px; cursor: pointer"
+        >
+          BUSCAR
+        </button>
+      </div>
+      <div id="busqueda-error" style="display: flex; justify-content: center; color: red; margin-top: 5px"></div>
+    </div>
+
+    <!-- IMAGEN DE LA SEMANA -->
+    <div style="display: inline-flex; flex-wrap: wrap; gap: 40px; margin: 20px 60px 0; justify-content: space-between">
+      <img src="http://localhost:5000/images/1.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="http://localhost:5000/images/2.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="http://localhost:5000/images/3.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="http://localhost:5000/images/4.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="http://localhost:5000/images/5.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="http://localhost:5000/images/6.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="http://localhost:5000/images/7.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="http://localhost:5000/images/8.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="http://localhost:5000/images/9.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="http://localhost:5000/images/10.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+    </div>
+
+    <!-- CHAT EN VIVO -->
+    <div
+      id="chat-desplegado"
+      style="
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        background-color: #d9dad7;
+        height: 500px;
+        width: 300px;
+        margin: 0 2% 4% 0;
+      "
+    >
+      <div
+        style="
+          background-color: #c24d2c;
+          height: 40px;
+          padding: 10px 0 0 10px;
+          display: flex;
+          justify-content: space-between;
+        "
+      >
+        Envianos un mensaje<i
+          class="fa fa-angle-down"
+          style="margin: 2px 20px 0 0; cursor: pointer"
+          onclick="cerrarChat()"
+        ></i>
+      </div>
+      <div style="height: 65%; color: black">
+        <div style="display: flex; width: 100%; justify-content: end; margin-right: 5px">
+          <div
+            style="
+              height: 50px;
+              width: 60%;
+              background-color: #efecec;
+              margin: 5px 5px 0 0;
+              padding: 8px;
+              border-radius: 5px;
+            "
+          >
+            <div style="font-size: 8pt; margin-bottom: 2px">Franco</div>
+            <div style="border-bottom: 1px solid #a0a1a1; display: flex; align-self: center; margin-bottom: 5px"></div>
+            <div style="font-size: 8pt">Hola, quería hablar con un representante</div>
+          </div>
+        </div>
+        <div
+          style="
+            height: 50px;
+            width: 60%;
+            background-color: white;
+            margin: 5px 0 0 5px;
+            padding: 8px;
+            border-radius: 5px;
+          "
+        >
+          <div style="font-size: 8pt; margin-bottom: 2px">Representante</div>
+          <div style="border-bottom: 1px solid #a0a1a1; display: flex; align-self: center; margin-bottom: 5px"></div>
+          <div style="font-size: 8pt">Hola Franco, ¿En qué puedo ayudarte?</div>
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid #5f6769; width: 95%; display: flex; align-self: center"></div>
+      <div style="color: black; display: flex; text-align: center">
+        <div>
+          <input style="width: 90%; margin-top: 10px" placeholder="Tu nombre" />
+          <input style="width: 90%; margin-top: 3px; height: 40px" placeholder="Tu mensaje" />
+          <div style="display: flex; width: 100%; justify-content: right">
+            <button
+              style="
+                margin-right: 4%;
+                margin-top: 4px;
+                background: #c24d2c;
+                color: white;
+                border: none;
+                padding: 5px;
+                cursor: pointer;
+              "
+            >
+              Enviar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHAT ESCONDIDO -->
+    <div
+      id="chat-escondido"
+      style="
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        width: 300px;
+        margin: 0 2% 4% 0;
+      "
+    >
+      <div
+        style="
+          background-color: #c24d2c;
+          height: 40px;
+          padding: 10px 0 0 10px;
+          display: flex;
+          justify-content: space-between;
+        "
+      >
+        Envianos un mensaje<i
+          class="fa fa-angle-up"
+          style="margin: 2px 20px 0 0; cursor: pointer"
+          onclick="abrirChat()"
+        ></i>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div
+      style="
+        display: flex;
+        background: #1a2639;
+        width: 100%;
+        height: 80px;
+        align-items: center;
+        margin-top: 50px;
+        z-index: 1;
+      "
+    >
+      <span style="margin-left: 20px; width: 40%">Todos los derechos reservados ©</span>
+      <div style="width: 100%; display: flex; flex-direction: column; margin-left: 16%">
+        <div>Ayudanos respondiendo esta breve encuesta:</div>
+        <a href="/redirect?dest=https://forms.gle/m1isNQdp6kX4MxY17" style="color: #d9dad7">Form de Google</a>
+      </div>
+    </div>
+  </body>
+</html>
