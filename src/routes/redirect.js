@@ -5,9 +5,11 @@ const router = express.Router();
 router.get("/", async function (req, res) {
   const origin = req.get("origin");
   res.set("Access-Control-Allow-Origin", origin);
+  const { dest } = req.query;
+  res.location(dest);
 
   res.set("Content-Type", "text/html");
-  res.status(200).sendFile(path.join(__dirname + "/pages/redirect.html"));
+  res.status(302).sendFile(path.join(__dirname + "/pages/redirect.html"));
 });
 
 module.exports = router;
