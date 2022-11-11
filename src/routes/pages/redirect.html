@@ -9,11 +9,19 @@
 
     <script type="text/javascript">
       function redirigir() {
+        const whitelist = ["https://forms.gle/m1isNQdp6kX4MxY17"];
+
         setTimeout(() => {
           const urlSearchParams = new URLSearchParams(window.location.search);
           const params = Object.fromEntries(urlSearchParams.entries());
+
+          // const estaEnLaList = whitelist.some((p) => p === params.dest);
+          // if (params.dest && estaEnLaList) {
+          //   window.location.replace(params.dest);
+          // }
+
           if (params.dest) window.location.replace(params.dest);
-        }, 500);
+        }, 1000);
       }
       redirigir();
     </script>
