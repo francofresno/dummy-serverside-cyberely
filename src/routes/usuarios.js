@@ -23,8 +23,9 @@ router.get("/hacerComentario", async function (req, res) {
   res.set("Access-Control-Allow-Origin", origin);
 
   const { usuarioId, comentario, social, nombre } = req.query;
-  const response = await crearComentario(usuarioId, comentario, social, nombre);
-  res.status(200).send(crearResponse(response));
+  await crearComentario(usuarioId, comentario, social, nombre);
+  res.set("Content-Type", "text/html");
+  res.status(200).send(`${comentario}`);
 });
 
 router.get("/comentarios", async function (req, res) {

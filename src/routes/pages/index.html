@@ -73,9 +73,9 @@
         barraDiv.style.alignSelf = "center";
         barraDiv.style.marginBottom = "5px";
         const mensajeDiv = innerContainer.appendChild(document.createElement("div"));
-        mensajeDiv.innerHTML = mensaje;
         mensajeDiv.id = GLOBAL_ID + "-mensaje";
         mensajeDiv.style.fontSize = "8pt";
+        innerContainer.insertAdjacentHTML("beforeend", mensaje);
 
         GLOBAL_ID += 1;
       }
@@ -118,9 +118,9 @@
             credentials: "include",
           }
         )
-          .then((response) => response.json())
-          .then(() => {
-            agregarComentarioAHTML(mensajeField.value, redSocialField.value, nombreField.value);
+          .then((response) => response.text())
+          .then((response) => {
+            agregarComentarioAHTML(response, redSocialField.value, nombreField.value);
             nombreField.value = "";
             redSocialField.value = "";
             mensajeField.value = "";
