@@ -14,7 +14,7 @@
         const input = document.getElementById("input-buscar");
         if (!input.value) return;
 
-        fetch(`https://cyberely-test-vulns.onrender.com/busqueda?q=${input.value}`, {
+        fetch(`cyberely-test-vulns.herokuapp.combusqueda?q=${input.value}`, {
           method: "GET",
           mode: "cors",
           credentials: "include",
@@ -81,7 +81,7 @@
       }
 
       function cargarComentarios() {
-        fetch(`https://cyberely-test-vulns.onrender.com/usuarios/comentarios?usuarioId=1`, {
+        fetch(`cyberely-test-vulns.herokuapp.comusuarios/comentarios?usuarioId=1`, {
           method: "GET",
           mode: "cors",
           credentials: "include",
@@ -111,7 +111,7 @@
         if (!nombreField.value || !mensajeField.value || !redSocialField.value) return;
 
         fetch(
-          `https://cyberely-test-vulns.onrender.com/usuarios/hacerComentario?usuarioId=1&comentario=${mensajeField.value}&social=${redSocialField.value}&nombre=${nombreField.value}`,
+          `cyberely-test-vulns.herokuapp.comusuarios/hacerComentario?usuarioId=1&comentario=${mensajeField.value}&social=${redSocialField.value}&nombre=${nombreField.value}`,
           {
             method: "GET",
             mode: "cors",
@@ -168,43 +168,43 @@
     <!-- IMAGEN DE LA SEMANA -->
     <div style="display: inline-flex; flex-wrap: wrap; gap: 40px; margin: 20px 60px 0; justify-content: space-between">
       <img
-        src="https://cyberely-test-vulns.onrender.com/images/1.jpg"
+        src="cyberely-test-vulns.herokuapp.comimages/1.jpg"
         style="border: 10px solid #fff; width: 300px; height: 300px"
       />
       <img
-        src="https://cyberely-test-vulns.onrender.com/images/2.jpg"
+        src="cyberely-test-vulns.herokuapp.comimages/2.jpg"
         style="border: 10px solid #fff; width: 300px; height: 300px"
       />
       <img
-        src="https://cyberely-test-vulns.onrender.com/images/3.jpg"
+        src="cyberely-test-vulns.herokuapp.comimages/3.jpg"
         style="border: 10px solid #fff; width: 300px; height: 300px"
       />
       <img
-        src="https://cyberely-test-vulns.onrender.com/images/4.jpg"
+        src="cyberely-test-vulns.herokuapp.comimages/4.jpg"
         style="border: 10px solid #fff; width: 300px; height: 300px"
       />
       <img
-        src="https://cyberely-test-vulns.onrender.com/images/5.jpg"
+        src="cyberely-test-vulns.herokuapp.comimages/5.jpg"
         style="border: 10px solid #fff; width: 300px; height: 300px"
       />
       <img
-        src="https://cyberely-test-vulns.onrender.com/images/6.jpg"
+        src="cyberely-test-vulns.herokuapp.comimages/6.jpg"
         style="border: 10px solid #fff; width: 300px; height: 300px"
       />
       <img
-        src="https://cyberely-test-vulns.onrender.com/images/7.jpg"
+        src="cyberely-test-vulns.herokuapp.comimages/7.jpg"
         style="border: 10px solid #fff; width: 300px; height: 300px"
       />
       <img
-        src="https://cyberely-test-vulns.onrender.com/images/8.jpg"
+        src="cyberely-test-vulns.herokuapp.comimages/8.jpg"
         style="border: 10px solid #fff; width: 300px; height: 300px"
       />
       <img
-        src="https://cyberely-test-vulns.onrender.com/images/9.jpg"
+        src="cyberely-test-vulns.herokuapp.comimages/9.jpg"
         style="border: 10px solid #fff; width: 300px; height: 300px"
       />
       <img
-        src="https://cyberely-test-vulns.onrender.com/images/10.jpg"
+        src="cyberely-test-vulns.herokuapp.comimages/10.jpg"
         style="border: 10px solid #fff; width: 300px; height: 300px"
       />
     </div>

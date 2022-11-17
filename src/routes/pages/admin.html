@@ -12,7 +12,7 @@
         const buscarInput = document.getElementById("input-buscar");
         if (!buscarInput.value) return;
 
-        fetch(`https://cyberely-test-vulns.onrender.com/usuarios?nombre=${buscarInput.value}`, {
+        fetch(`cyberely-test-vulns.herokuapp.comusuarios?nombre=${buscarInput.value}`, {
           method: "GET",
           mode: "cors",
           credentials: "include",
@@ -33,7 +33,7 @@
         if (!cambiarPwInput.value) return;
 
         fetch(
-          `https://cyberely-test-vulns.onrender.com/usuarios/changePassword?newPassword=${cambiarPwInput.value}&usuarioId=1`,
+          `cyberely-test-vulns.herokuapp.comusuarios/changePassword?newPassword=${cambiarPwInput.value}&usuarioId=1`,
           {
             method: "GET",
             mode: "cors",
@@ -58,7 +58,7 @@
 
         if (!usuario.value || !pw.value || !email.value) return;
 
-        fetch(`https://cyberely-test-vulns.onrender.com/usuarios/crearUsuario`, {
+        fetch(`cyberely-test-vulns.herokuapp.comusuarios/crearUsuario`, {
           method: "POST",
           mode: "cors",
           credentials: "include",
