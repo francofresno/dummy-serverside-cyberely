@@ -14,7 +14,7 @@
         const input = document.getElementById("input-buscar");
         if (!input.value) return;
 
-        fetch(`cyberely-test-vulns.herokuapp.combusqueda?q=${input.value}`, {
+        fetch(`busqueda?q=${input.value}`, {
           method: "GET",
           mode: "cors",
           credentials: "include",
@@ -81,7 +81,7 @@
       }
 
       function cargarComentarios() {
-        fetch(`cyberely-test-vulns.herokuapp.comusuarios/comentarios?usuarioId=1`, {
+        fetch(`usuarios/comentarios?usuarioId=1`, {
           method: "GET",
           mode: "cors",
           credentials: "include",
@@ -111,7 +111,7 @@
         if (!nombreField.value || !mensajeField.value || !redSocialField.value) return;
 
         fetch(
-          `cyberely-test-vulns.herokuapp.comusuarios/hacerComentario?usuarioId=1&comentario=${mensajeField.value}&social=${redSocialField.value}&nombre=${nombreField.value}`,
+          `usuarios/hacerComentario?usuarioId=1&comentario=${mensajeField.value}&social=${redSocialField.value}&nombre=${nombreField.value}`,
           {
             method: "GET",
             mode: "cors",
@@ -167,46 +167,16 @@
 
     <!-- IMAGEN DE LA SEMANA -->
     <div style="display: inline-flex; flex-wrap: wrap; gap: 40px; margin: 20px 60px 0; justify-content: space-between">
-      <img
-        src="cyberely-test-vulns.herokuapp.comimages/1.jpg"
-        style="border: 10px solid #fff; width: 300px; height: 300px"
-      />
-      <img
-        src="cyberely-test-vulns.herokuapp.comimages/2.jpg"
-        style="border: 10px solid #fff; width: 300px; height: 300px"
-      />
-      <img
-        src="cyberely-test-vulns.herokuapp.comimages/3.jpg"
-        style="border: 10px solid #fff; width: 300px; height: 300px"
-      />
-      <img
-        src="cyberely-test-vulns.herokuapp.comimages/4.jpg"
-        style="border: 10px solid #fff; width: 300px; height: 300px"
-      />
-      <img
-        src="cyberely-test-vulns.herokuapp.comimages/5.jpg"
-        style="border: 10px solid #fff; width: 300px; height: 300px"
-      />
-      <img
-        src="cyberely-test-vulns.herokuapp.comimages/6.jpg"
-        style="border: 10px solid #fff; width: 300px; height: 300px"
-      />
-      <img
-        src="cyberely-test-vulns.herokuapp.comimages/7.jpg"
-        style="border: 10px solid #fff; width: 300px; height: 300px"
-      />
-      <img
-        src="cyberely-test-vulns.herokuapp.comimages/8.jpg"
-        style="border: 10px solid #fff; width: 300px; height: 300px"
-      />
-      <img
-        src="cyberely-test-vulns.herokuapp.comimages/9.jpg"
-        style="border: 10px solid #fff; width: 300px; height: 300px"
-      />
-      <img
-        src="cyberely-test-vulns.herokuapp.comimages/10.jpg"
-        style="border: 10px solid #fff; width: 300px; height: 300px"
-      />
+      <img src="images/1.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="images/2.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="images/3.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="images/4.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="images/5.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="images/6.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="images/7.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="images/8.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="images/9.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
+      <img src="images/10.jpg" style="border: 10px solid #fff; width: 300px; height: 300px" />
     </div>
 
     <!-- FOOTER -->
